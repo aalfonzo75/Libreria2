@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!--Head -->
+    <head th:replace="/fragments/head :: head"></head>      
+   
+    <body>
+        <!-- Navigation -->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <!-- Header 
+       <header th:replace="/fragments/headergenerico :: header"></header>-->
+
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">Exito</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        
+        <div class="container">
+           <!-- <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+            <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>-->
+
+            <h1> Listado de Libros</h1>
+            <table class="table table-hover table-bordered">                    
+                <thead class="thead-dark text-center">
+                    <tr class="table-light">
+                        
+                        <th scope="col">Isbn</th>
+                        <th scope="col">Titulo</th>					
+                        <th scope="col">Anio</th>
+                        <th scope="col">E</th>
+                        <th scope="col">P</th>
+                        <th scope="col">R</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Editorial</th>
+                        <th scope="col">¿Esta activo?</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Alta/Baja</th>
+                    </tr>
+                </thead>
+                <tbody th:each="libro : ${libros}">
+                    <tr>                        
+                        <!--<td scope="row" th:text="${libro.id}"></td>-->
+                        <td scope="row" th:text="${libro.isbn}"></td> 
+                        <td class="col-4" th:text="${libro.titulo}"></td>
+                        <td class="col-1"  th:text="${libro.anio}"></td>
+                        <td th:text="${libro.ejemplares}"></td>
+                        <td th:text="${libro.ePrestados}"></td>
+                        <td th:text="${libro.eRestantes}"></td>
+                        <td th:text="${libro.autor.nombre}"></td>
+                        <td th:text="${libro.editorial.nombre}"></td>
+                        <td><!--Icono ACTIVO -->
+                            <i th:if="${libro.alta}" class="fas fa-check-circle color-green"></i> <!--Si el libro esta activo por circulo verde -->
+                            <i th:unless="${libro.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
+                        </td>
+                        <td><!--Icono EDITAR -->
+                            <a th:href="@{/libro/editarlibro/__${libro.id}__}"><i class="far fa-edit"></i></a> 
+                          </td>   
+                            <td><!-- ALTA/BAJA -->
+                            <a th:if="${libro.alta}" th:href="@{/libro/baja/__${libro.id}__}"><i class="fas fa-trash-alt"></i></a> 
+                            <a th:unless="${libro.alta}" th:href="@{/libro/alta/__${libro.id}__}"><i class="fas fa-arrow-alt-circle-up"></i></a>  
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:replace="/fragments/boostjs :: script"></script>
+    </body>
+</html>

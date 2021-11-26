@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!--Head -->
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body>
+        <!--<header><!--Contenido del Header-->
+
+        <!-- Navigation -->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <div class="container mt-5"><!--Contenedor-->
+            <div class="row m-0 d-flex w-100 justify-content-center mb-5">
+                <div class="col-12 px-2 text-center">
+                    <h2 class="display-8 font-weight-bolder"> Crear Autor</h2>
+                </div>
+            </div>
+            <div class="row d.flex w-100 justify-content-around">
+                <div class="container m-auto">
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Exito</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Error</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form class="form-row" method="Post" th:action="@{/autor/crearautor}">
+                        <!--  <input hidden th:field="*{id}"> -->                    
+                        <div class="col-2">
+                            <label for="">Nombre</label>
+                        </div>
+                        <div class="col-10 mb-3">
+                            <input name="nombre" class="form-control w-100" type="text" placeholder="Ingrese el nombre del Autor" required>
+                        </div>
+
+                        <div class="col-12 mt-3 mb-3">
+                            <button class="btn btn-dark btn-block w-100" type="submit">Crear</button>
+                        </div>
+                    </form>
+                </div>
+
+                <section class="py-5 text-center container">
+                    <div class="row py-lg-5">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                            <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!--Fin Contenedor-->
+
+            <!-- Footer -->
+            <footer th:replace="/fragments/footer :: footer"></footer>
+
+            <!-- Bootstrap core JavaScript -->
+            <script th:replace="/fragments/boostjs :: script"></script>
+    </body>
+</html>
