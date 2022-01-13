@@ -20,7 +20,8 @@ public class Editorial {
     private String nombre;
 
     private Boolean alta;
-
+    
+    //GETTERS AND SETTERS
     public String getId() {
         return id;
     }

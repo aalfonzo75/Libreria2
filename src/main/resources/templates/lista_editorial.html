@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!-- Head -->
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body id="page-top">
+
+        <!-- Navigation -->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <!-- Header -->
+        <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->
+            <div class="container mt-5"><!--Contenedor-->
+
+                <div class="row d.flex w-100 justify-content-around text-white">
+                    <div class="container m-auto">
+                        <div th:if="${exito}!=null" class="card bg-success mb-3 ">
+                            <div class="card-body">
+                                <h5 class="card-title">Exito</h5>
+                                <p class="card-text" th:text="${exito}"></p>
+                            </div>
+                        </div>
+                        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Error</h5>
+                                <p class="card-text" th:text="${error}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 px-2 text-center">
+                        <h1 class="display-8 font-weight-bolder">  Listado de Editoriales</h1>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-dark table-striped table-bordered">                    
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">¿Esta activo?</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Alta/Baja</th>                                       
+                                </tr>
+                            </thead>
+                            <tbody th:each="editorial : ${editoriales}">
+                                <tr>
+                                    <!-- <th scope="row" th:text="${libro.id}"></th>-->
+                                    
+                                    <td th:text="${editorial.nombre}"></td>                                       
+
+                                    <td><!--Icono ACTIVO -->
+                                        <i th:if="${editorial.alta}" class="fas fa-check-circle color-green"></i> <!--Si el libro esta activo por circulo verde -->
+                                        <i th:unless="${editorial.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
+                                    </td>
+                                    <td><!--Icono EDITAR -->
+                                        <a th:href="@{/editorial/editar_editorial/__${editorial.id}__}"><i class="far fa-edit"></i></a> 
+                                    </td>   
+                                    <td><!-- ALTA/BAJA -->
+                                        <a th:if="${editorial.alta}" th:href="@{/editorial/baja/__${editorial.id}__}"><i class="fas fa-trash-alt"></i></a> 
+                                        <a th:unless="${editorial.alta}" th:href="@{/editorial/alta/__${editorial.id}__}"><i class="fas fa-arrow-alt-circle-up"></i></a>  
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex_right">
+                        <a th:href="@{/}" class="btn btn-primary my-2">Volver al Menú</a>
+                        <a th:href="@{/editorial/crear_editorial}" class="btn btn-success my-2">Agregar otra editorial</a>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:replace="/fragments/boostjs :: script"></script> 
+
+    </body>
+</html>
+

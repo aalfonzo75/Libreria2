@@ -1,6 +1,7 @@
 package com.libreria2App.repositorios;
 import com.libreria2App.entidades.Libro;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,6 +33,9 @@ public interface LibroRepositorio extends JpaRepository<Libro, String> {
 
     @Query("SELECT l from Libro l WHERE l.alta = true ")
     public List<Libro> buscarActivos();
+    
+    @Query("SELECT l FROM Libro l WHERE l.isbn = :isbn")
+    Optional<Libro> validaIsbn(@Param("isbn") Long isbn);
     
     
     // con esta query se obtiene contenido parecido a, LIKE %?1% remplaza a LIKE :variable

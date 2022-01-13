@@ -1,4 +1,5 @@
 package com.libreria2App.controladores;
+
 import com.libreria2App.entidades.Editorial;
 import com.libreria2App.errores.ErrorServicio;
 import com.libreria2App.servicios.EditorialServicio;
@@ -22,66 +23,66 @@ public class EditorialController {
     @Autowired
     private EditorialServicio editorialServicio;
 
-    @GetMapping("/creareditorial") //localhost:8080/editorial/registro
+    @GetMapping("/crear_editorial") //localhost:8080/editorial/registro
     public String guardarEditorial(ModelMap model) {
-        return "creareditorial";
+        return "crear_editorial";
     }
 
-    @PostMapping("/creareditorial")
+    @PostMapping("/crear_editorial")
     public String guardarEditorial(ModelMap model, @RequestParam String nombre) {
         try {
             editorialServicio.crearEditorial(nombre);
             model.put("exito", "Registro exitoso");
-            return "creareditorial";
+            return "crear_editorial";
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
-            return "creareditorial";
+            return "crear_editorial";
         }
     }
 
-    @GetMapping("/editareditorial/{id}") //PATHVARIABLE
+    @GetMapping("/editar_editorial/{id}") //PATHVARIABLE
     public String modificarEditorial(@PathVariable String id, ModelMap model) {
         model.put("editorial", editorialServicio.getOne(id));
-        return "editareditorial";
+        return "editar_editorial";
     }
 
-    @PostMapping("/editareditorial/{id}")
+    @PostMapping("/editar_editorial/{id}")
     public String modificarEditorial(ModelMap model, @PathVariable String id, @RequestParam String nombre) {
         try {
             editorialServicio.modificarEditorial(id, nombre);
             model.put("exito", "Modificacion exitosa");
-
-            return "listaeditorial";
+            return lista(model);
+//            return "redirect:/editorial/listaeditorial";
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
-            return "editareditorial";
+            return "editar_editorial";
         }
     }
 
-    @GetMapping("/listaeditorial")
+    @GetMapping("/lista_editorial")
     public String lista(ModelMap modelo) {
         List<Editorial> listaEditorial = editorialServicio.listarTodos();
         modelo.addAttribute("editoriales", listaEditorial);
-        return "listaeditorial";
+        return "lista_editorial";
     }
-    
+
     @GetMapping("/baja/{id}")
     public String baja(@PathVariable String id) {
 
         try {
             editorialServicio.baja(id);
-            return "redirect:/editorial/listaeditorial";
+            return "redirect:/editorial/lista_editorial";
         } catch (Exception e) {
             return "redirect:/";
         }
     }
-    
+
     @GetMapping("/alta/{id}")
     public String alta(@PathVariable String id) {
 
         try {
             editorialServicio.alta(id);
-            return "redirect:/editorial/listaeditorial";
+            return "redirect:/editorial/lista_editorial";
         } catch (Exception e) {
             return "redirect:/";
         }

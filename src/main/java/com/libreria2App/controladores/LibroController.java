@@ -1,4 +1,5 @@
 package com.libreria2App.controladores;
+
 import com.libreria2App.entidades.Autor;
 import com.libreria2App.entidades.Editorial;
 import com.libreria2App.entidades.Libro;
@@ -36,7 +37,7 @@ public class LibroController {
     @Autowired
     private EditorialServicio editorialServicio;
 
-    @GetMapping("/crearlibro")
+    @GetMapping("/crear_libro")
     public String guardarLibro(ModelMap model, @RequestParam(required = false) String id) {
 
         if (id != null) {
@@ -45,7 +46,7 @@ public class LibroController {
             if (libro != null) {
                 model.addAttribute("libro", libro);
             } else {
-                return "redirect:/libro/listalibro";
+                return "redirect:/libro/lista_libro";
             }
 
         } else {
@@ -56,92 +57,58 @@ public class LibroController {
         List<Autor> autores = autorServicio.listarTodos(); //Se listan los autores
         List<Editorial> editoriales = editorialServicio.listarTodos();  //Se listan las editoriales
 
-        model.addAttribute("listaautor", autores); //Se guardan los autores en el modelo para que mi pag web llene ese combo con las guardadas en BD
-        model.addAttribute("listaeditorial", editoriales);
-        return "crearlibro";  //retorno esa vista
+        model.addAttribute("lista_autor", autores); //Se guardan los autores en el modelo para que mi pag web llene ese combo con las guardadas en BD
+        model.addAttribute("lista_editorial", editoriales);
+        return "crear_libro";  //retorno esa vista
     }
 
-//    @GetMapping("/crearlibro")
-//    public String guardarLibro(ModelMap model, @RequestParam(required = false) String id) {
-//                System.out.println("hola");
-//
-//        List<Autor> autores = autorServicio.listarTodos(); //Se listan los autores
-//        List<Editorial> editoriales = editorialServicio.listarTodos();  //Se listan las editoriales
-//
-//        model.addAttribute("listaautor", autores); //Se guardan los autores en el modelo para que mi pag web llene ese combo con las guardadas en BD
-//        model.addAttribute("listaeditorial", editoriales);
-//
-//        if (id != null) {
-//            Libro libro = libroServicio.buscarPorId(id);
-//            model.addAttribute("libro", libro);
-//            return "crearlibro";
-//
-//        } else {
-//            Libro libro = new Libro();
-//            libro.setAlta(true);
-//            model.addAttribute("libro", libro);
-//                    System.out.println(libro.toString());
-//
-//        }
-//
-//        return "crearlibro";  //retorno esa vista
-//    }
-    @PostMapping("/crearlibro")
+
+    @PostMapping("/crear_libro")
     public String guardarLibro(ModelMap model, RedirectAttributes redirectAtr, @ModelAttribute Libro libro) {
-        System.out.println("isbn" + libro.getIsbn());
-        System.out.println("titulo" + libro.getTitulo());
-        System.out.println("anio" + libro.getAnio());
-        System.out.println("ejemplares" + libro.getEjemplares());
-        System.out.println("autor" + libro.getAutor());
-        System.out.println("editorial" + libro.getEditorial());
-
-        try {
-
+       try {
             libroServicio.crearLibro(libro);
             model.put("exito", "Registro exitoso");
-            return "redirect:/libro/listalibro";  //retorno esa vista
+            return "redirect:/libro/lista_libro";  //retorno esa vista
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
-            return "crearlibro";  //retorno esa vista
+            return "crear_libro";  //retorno esa vista
         }
     }
 //    @GetMapping("/editarlibro")
-    @GetMapping("/editarlibro/{id}") // PATHVARIABLE: anotacion para configurar variables dentro de los propios segmentos de la URL para enviarlos
+
+    @GetMapping("/editar_libro/{id}") // PATHVARIABLE: anotacion para configurar variables dentro de los propios segmentos de la URL para enviarlos
     public String modificar(@PathVariable String id, ModelMap model) {
 
         List<Autor> autores = autorServicio.listarActivos(); //Se listan los autores activos
         List<Editorial> editoriales = editorialServicio.listarActivos();
-        model.put("listaautor", autores);
-        model.put("listaeditorial", editoriales);
+        model.put("lista_autor", autores);
+        model.put("lista_editorial", editoriales);
         model.put("libro", libroServicio.getOne(id));
 
-        return "editarlibro";  //retorno esa vista
+        return "editar_libro";  //retorno esa vista
     }
 
-    
-//     @PostMapping("/editarlibro")
-    @PostMapping("/editarlibro/{id}")
+//     @PostMapping("/editar_libro")
+    @PostMapping("/editar_libro/{id}")
     public String modificar(ModelMap model, @PathVariable String id, @ModelAttribute Libro libro) {
         try {
             libroServicio.modificarLibro(libro);
             model.put("exito", "Modificacion exitosa");
-            System.out.println("aqui modifico mi libro en el controlador");
-            System.out.println("titulo" + libro.getTitulo());
-        System.out.println("libro" + libro.toString());
-            return "redirect:/libro/listalibro";
+//            return "redirect:/libro/lista_libro";
+            return listaLibros(model);
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
-            return "editarlibro";
+            return "editar_libro";
         }
     }
 
-    @GetMapping("/listalibro")
+    @GetMapping("/lista_libro")
     public String listaLibros(ModelMap model) {
 
         List<Libro> todos = libroServicio.listaTodosLibros();
         model.addAttribute("libros", todos);
 
-        return "listalibro";  //retorno esa vista
+        return "lista_libro";  //retorno esa vista
     }
 
     @GetMapping("/baja/{id}")
@@ -149,7 +116,7 @@ public class LibroController {
 
         try {
             libroServicio.baja(id);
-            return "redirect:/libro/listalibro";
+            return "redirect:/libro/lista_libro";
         } catch (Exception e) {
             return "redirect:/";
         }
@@ -161,58 +128,11 @@ public class LibroController {
 
         try {
             libroServicio.alta(id);
-            return "redirect:/libro/listalibro";
+            return "redirect:/libro/lista_libro";
         } catch (Exception e) {
             return "redirect:/";
         }
     }
 
-//     @GetMapping("/listalibros")
-//    public String listaLibros(ModelMap model, @RequestParam(required = false) String buscar) {
-//        //si el parametro "buscar" NO es nulo, agrega al modelo una lista de libros buscados
-//        if (buscar !=null || buscar.length()<1) {
-//            List<Libro> buscarLibro = libroServicio.listaBuscarLibro(buscar);
-//           model.addAttribute("libros", buscarLibro);
-//        } else {//si no, agrega al modelo una lista con todos los libros
-//            List<Libro> todos = libroServicio.listaTodosLibros();
-//        model.addAttribute("libros", todos);
-//        }        
-//        return "listalibros";  //retorno esa vista
-//    }
 }
 
-// @PostMapping("/registro")
-//    public String guardarLibro(ModelMap model, @RequestParam Long isbn, @RequestParam String titulo, @RequestParam Integer anio, @RequestParam Integer ejemplares, @RequestParam Integer ejemplaresPrestados, @RequestParam Integer ejemplaresRestantes, @RequestParam String autor, @RequestParam String editorial) {
-//
-//        try {
-//
-//            libroServicio.guardar(isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, autor, editorial);
-//            model.put("exito", "Registro exitoso");
-//            return "form-libro.html";  //retorno esa vista
-//        } catch (ErrorServicio e) {
-//            model.put("error", "Falto algun dato");
-//            return "form-libro.html";  //retorno esa vista
-//        }
-//    }
-//
-//    @GetMapping("/modificar/{id}") // PATHVARIABLE: anotacion para configurar variables dentro de los propios segmentos de la URL para enviarlos
-//    public String modificar(@PathVariable String id, ModelMap model) {
-//
-//        model.put("libro", libroServicio.getOne(id));
-//
-//        return "form-libro-modif";  //retorno esa vista
-//    }
-//
-//    @PostMapping("/modificar/{id}")
-//    public String modificar(ModelMap model, @PathVariable String id, @RequestParam Long isbn, @RequestParam String titulo, @RequestParam Integer anio, @RequestParam Integer ejemplares, @RequestParam Integer ejemplaresPrestados, @RequestParam Integer ejemplaresRestantes, @RequestParam String autor, @RequestParam String editorial) {
-//        try {
-//            libroServicio.modificar(id, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, autor, editorial);
-//            model.put("exito", "Modificacion exitosa");
-//
-//            return "list-libro";
-//        } catch (Exception e) {
-//            model.put("error", "Falto algun dato");
-//            return "form-libro-modif";
-//        }
-
-//    }

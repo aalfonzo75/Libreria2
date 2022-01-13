@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!-- Head -->
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body id="page-top">
+
+        <!-- Navigation -->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <!-- Header -->
+        <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->
+            <div class="container mt-5"><!--Contenedor-->
+           
+            <div class="row d.flex w-100 justify-content-around text-white">
+                <div class="container m-auto">
+                    <div th:if="${exito}!=null" class="card bg-success mb-3 ">
+                        <div class="card-body">
+                            <h5 class="card-title">Exito</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Error</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-2 text-center">
+                    <h1 class="display-8 font-weight-bolder">Editar Préstamo</h1>
+                </div>
+                <div class="col-md-6">
+                    <form th:action="@{/prestamo/editar_prestamo/__${prestamo.id}__}" th:object="${prestamo}" class="row g-3" method="POST">
+                            <input hidden th:field="*{id}">  
+                                                      
+                            <div class="col-6">
+                                <label for="" class="form-label">Cliente que solicita el prestamo </label>
+                                <select class="form-control" th:field="*{cliente}">                                    
+                                    <option value="0" selected>Seleccione un Cliente</option>
+                                     <!-- Uso de th:selected="${variable o condición}" para prefijar el valor actual del prestamo -->
+                                    <option th:each="c : ${lista_cliente}" th:utext="${c.nombre}" th:value="${c.id}" th:selected="${cliente.id==prestamo.cliente.id}"></option>
+                                </select>
+                            </div>                            
+                            
+
+                            <div class="col-6">
+                                <label for="" class="form-label">Libro para el prestamo </label>
+                                <select class="form-control" th:field="*{libro}">                                    
+                                    <option value="0" selected>Seleccione un Libro</option>
+                                    <option th:each="l : ${lista_libro}" th:utext="${l.nombre}" th:value="${l.id}" th:selected="${libro.id==prestamo.libro.id}"></option>
+                                </select>
+                            </div> 
+                            
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                             <a th:href="@{/#prestamo}" class="btn btn-secondary">Volver al Menú</a>
+                        </div>
+                    </form>
+                </div>
+                 </div>
+                </div>
+        </header>
+      
+       <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:replace="/fragments/boostjs :: script"></script> 
+
+    </body>
+</html>
+

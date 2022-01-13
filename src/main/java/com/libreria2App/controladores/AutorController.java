@@ -1,4 +1,5 @@
 package com.libreria2App.controladores;
+
 import com.libreria2App.entidades.Autor;
 import com.libreria2App.errores.ErrorServicio;
 import com.libreria2App.servicios.AutorServicio;
@@ -18,71 +19,70 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/autor")
 public class AutorController {
-    
+
     @Autowired
     private AutorServicio autorServicio;
-        
-    
-    @GetMapping("/crearautor")
+
+    @GetMapping("/crear_autor")
     public String guardarAutor(ModelMap model) {
-        return "crearautor";  //retorno esa vista
+        return "crear_autor";  //retorno esa vista
     }
-    
-    @PostMapping("/crearautor")
+
+    @PostMapping("/crear_autor")
     public String guardarAutor(ModelMap model, @RequestParam String nombre) {
         try {
             autorServicio.crearAutor(nombre);
             model.put("exito", "Registro exitoso");
-            return "crearautor";
+            return "crear_autor";
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
-            return "crearautor";
+            return "crear_autor";
         }
     }
-    
-     @GetMapping("/editarautor/{id}") //PATHVARIABLE
+
+    @GetMapping("/editar_autor/{id}") //PATHVARIABLE
     public String modificarAutor(@PathVariable String id, ModelMap model) {
         model.put("autor", autorServicio.getOne(id));
-        return "editarautor";
+        return "editar_autor";
     }
 
-    @PostMapping("/editarautor/{id}")
+    @PostMapping("/editar_autor/{id}")
     public String modificarAutor(ModelMap model, @PathVariable String id, @RequestParam String nombre) {
         try {
             autorServicio.modificarAutor(id, nombre);
             model.put("exito", "Modificacion exitosa");
-
-            return "listaautor";
+            return lista(model);
+//            return "redirect:/autor/lista_autor";
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
-            return "editarautor";
+            return "editar_autor";
         }
     }
-    
-    @GetMapping("/listaautor")
+
+    @GetMapping("/lista_autor")
     public String lista(ModelMap model) {
         List<Autor> todos = autorServicio.listarTodos();
         model.addAttribute("autores", todos);
-        return "listaautor";  //retorno esa vista
+        return "lista_autor";  //retorno esa vista
     }
-    
+
     @GetMapping("/baja/{id}")
     public String baja(@PathVariable String id) {
 
         try {
             autorServicio.baja(id);
-            return "redirect:/autor/listaautor";
+            return "redirect:/autor/lista_autor";
         } catch (Exception e) {
             return "redirect:/";
         }
     }
-    
+
     @GetMapping("/alta/{id}")
     public String alta(@PathVariable String id) {
 
         try {
             autorServicio.alta(id);
-            return "redirect:/autor/listaautor";
+            return "redirect:/autor/lista_autor";
         } catch (Exception e) {
             return "redirect:/";
         }

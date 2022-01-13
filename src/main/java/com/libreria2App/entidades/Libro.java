@@ -36,12 +36,13 @@ public class Libro {
 
     private Boolean alta;
 
+    //RELACIONES
     @ManyToOne
     private Autor autor;
-
     @ManyToOne
     private Editorial editorial;
-
+    
+    //GETTERS AND SETTERS
     public String getId() {
         return id;
     }

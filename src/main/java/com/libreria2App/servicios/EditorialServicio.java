@@ -27,7 +27,6 @@ public class EditorialServicio {
         validarDatos(nombre);
 
         Editorial editorial = new Editorial();
-//         List<Libro> listaLibros = new ArrayList();
         editorial.setNombre(nombre);
         editorial.setAlta(true);
 
@@ -116,18 +115,3 @@ public class EditorialServicio {
     }
 
 }
-
-//@Transactional
-//    public void DarDeAltaEditorial(String id) throws ErrorServicio {
-//
-//        Optional<Editorial> respuesta = editorialRepositorio.findById(id);
-//        if (respuesta.isPresent()) {
-//            Editorial editorial = respuesta.get();
-//            editorial.setAlta(true);
-//
-//            editorialRepositorio.save(editorial);
-//
-//        } else {
-//            throw new ErrorServicio("No se encontro la editorial con el id solicitado");
-//        }
-//    }

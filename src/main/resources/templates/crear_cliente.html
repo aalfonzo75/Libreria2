@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+   <!-- Head -->
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body id="page-top">
+
+        <!-- Navigation -->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <!-- Header -->
+        <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper... -->
+            <div class="container mt-5"><!--Contenedor-->
+           
+            <div class="row d.flex w-100 justify-content-around text-white">
+                <div class="container m-auto">
+                    <div th:if="${exito}!=null" class="card bg-success mb-3 ">
+                        <div class="card-body">
+                            <h5 class="card-title">Exito</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Error</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-2 text-center">
+                    <h1 class="display-8 font-weight-bolder"> Crear Cliente</h1>
+                </div>
+                <div class="col-md-6">
+                    <form th:action="@{/cliente/crear_cliente}" th:object="${cliente}" class="row g-3" method="POST">
+                            <!--   <input hidden th:field="*{id}">  -->   
+                            
+                            <div class="col-6">
+                                <label for="" class="form-label">Nombre</label>
+                                 <input name="nombre" class="form-control w-100" type="text" placeholder="Ingrese el Nombre" required>
+                            </div>
+                            
+                            <div class="col-6">
+                                <label for="" class="form-label">Apellido</label>
+                                 <input name="apellido" class="form-control w-100" type="text" placeholder="Ingrese el Apellido" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="" class="form-label">DNI</label>
+                                 <input name="dni" class="form-control w-100" type="number" placeholder="Ingrese el DNI" required>
+                            </div>
+                            
+                            <div class="col-6">
+                                <label for="" class="form-label">Telefono</label>
+                                 <input name="telefono" class="form-control w-100" type="text" placeholder="Ingrese el numero de tlf" required>
+                            </div>
+                            
+                                                         
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                             <a th:href="@{/#cliente}" class="btn btn-secondary">Volver al Menú</a>
+                        </div>
+                    </form>
+                </div>
+                 </div>
+                </div>
+        </header>
+      
+        <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:replace="/fragments/boostjs :: script"></script> 
+        
+    </body>
+</html>
+

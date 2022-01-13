@@ -14,4 +14,7 @@ spring:
   thymeleaf:
     cache: false
 server:
-  port: 8080
+  port: 8080  
+mvc:
+  format:
+    date: yyyy-MM-dd
