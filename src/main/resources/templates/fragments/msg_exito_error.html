@@ -1,0 +1,16 @@
+<!-- Mensaje EXITO-->
+<div th:if="${exito}!=null" class="card bg-success mb-3 ">
+    <div class="card-body">
+        <!--<h5 class="card-title">Éxito</h5>-->
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
+<!-- Mensaje ERROR-->
+<div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+    <div class="card-body">
+        <!--<h5 class="card-title">Error</h5>-->
+        <p class="card-text" th:text="${error}"></p>
+    </div>
+</div>
+<!-- TITULO-->
+ <h1 th:text="${title}"></h1>

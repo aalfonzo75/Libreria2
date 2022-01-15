@@ -10,39 +10,57 @@
         <nav th:replace="/fragments/navbar :: nav"></nav>
 
         <!-- Header -->
-        <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->
-            <div class="container mt-5"><!--Contenedor-->
+        <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->                 
+            <div class="container mt-5"><!--Contenedor-->                 
                 <div class="row d.flex w-100 justify-content-around text-white">
+                    <!--<div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+                    <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>-->
+
                     <div class="container m-auto">
+                        <!-- Mensaje EXITO-->
                         <div th:if="${exito}!=null" class="card bg-success mb-3 ">
                             <div class="card-body">
-                                <h5 class="card-title">Exito</h5>
+                                <!--<h5 class="card-title">Éxito</h5>-->
                                 <p class="card-text" th:text="${exito}"></p>
                             </div>
                         </div>
+                        <!-- Mensaje ERROR-->
                         <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Error</h5>
+                                <!--<h5 class="card-title">Error</h5>-->
                                 <p class="card-text" th:text="${error}"></p>
                             </div>
                         </div>
+                        <!-- TITULO-->
+                        <div class="col-12 px-2 text-center">
+                            <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
+                        </div>
+
                     </div>
-                    <div class="col-12 px-2 text-center">
-                        <h1 class="display-8 font-weight-bolder">  Listado de Libros</h1>
+                    <div th:if="${libros.isEmpty()}" class="card text-white bg-warning mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Todavía no hay libros cargados</h5>                                
+                        </div>
                     </div>
-                    <div class="table-responsive">
+                    <!-- <div th:if="${libros.isEmpty()}">
+                         <h5>Todavía no hay libros cargados.</h5>
+                     </div>-->
+                    <!--<div class="col-12 px-2 text-center">
+                        <h1 class="display-8 font-weight-bolder">Listado de Libros</h1>
+                    </div>-->
+                    <div class="table-responsive" th:unless="${libros.isEmpty()}">
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
                                     <th scope="col">Isbn</th>
                                     <th scope="col">Titulo</th>					
                                     <th scope="col">Año</th>
-                                    <th scope="col">E</th>
-                                    <th scope="col">P</th>
-                                    <th scope="col">R</th>
                                     <th scope="col">Autor</th>
                                     <th scope="col">Editorial</th>
-                                    <th scope="col">¿Esta activo?</th>
+                                    <th scope="col">E</th>
+                                    <th scope="col">P</th>
+                                    <th scope="col">R</th>                                    
+                                    <th scope="col">¿Activo?</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Alta/Baja</th>
                                 </tr>
@@ -50,13 +68,14 @@
                             <tbody th:each="libro : ${libros}">
                                 <tr> 
                                     <td scope="row" th:text="${libro.isbn}"></td> 
-                                    <td class="col-2" th:text="${libro.titulo}"></td> <!-- para ajustar el ancho de columna usar: class="col-1" -->  
+                                    <td th:text="${libro.titulo}"></td> <!-- para ajustar el ancho de columna usar: class="col-1" -->  
                                     <td th:text="${libro.anio}"></td>
+                                    <td th:text="${libro.autor.nombre}"></td>
+                                    <td th:text="${libro.editorial.nombre}"></td>
                                     <td th:text="${libro.ejemplares}"></td>
                                     <td th:text="${libro.ePrestados}"></td>
                                     <td th:text="${libro.eRestantes}"></td>
-                                    <td th:text="${libro.autor.nombre}"></td>
-                                    <td th:text="${libro.editorial.nombre}"></td>
+
                                     <td><!--Icono ACTIVO -->
                                         <i th:if="${libro.alta}" class="fas fa-check-circle color-green"></i> <!--Si el libro esta activo por circulo verde -->
                                         <i th:unless="${libro.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
@@ -71,18 +90,20 @@
                                 </tr>
 
                             </tbody>
+
                         </table>
                     </div>
-                     <div class="flex_right">
-                       <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
-                       <a th:href="@{/libro/crear_libro}" class="btn btn-success my-2">Agregar otro libro</a>
+                    <div class="flex_right">
+                        <a th:href="@{/}" class="btn btn-warning my-2">Volver</a>
+                        <a th:href="@{/libro/crear_libro}" class="btn btn-success my-2">Agregar otro libro</a> 
+                        <a th:href="@{/libro/lista_libro/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
                     </div>
-                    
+                    <!--  <a th:href="@{/libro/lista_libro/?format=pdf}" class="nav-link float-lefth" title="Exportar a PDF" target="_blank"><img class="img-responsive center-box" th:src="@{/assets/download.png}" height="auto"></a>-->
                 </div>
             </div>
         </header>
 
-       <!-- Footer-->
+        <!-- Footer-->
         <footer th:replace="/fragments/footer :: footer"></footer>
 
         <!-- Bootstrap core JavaScript -->

@@ -13,8 +13,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect    
   thymeleaf:
     cache: false
-server:
-  port: 8080  
-mvc:
-  format:
-    date: yyyy-MM-dd
+  server:
+    port: 8080  
+  mvc:
+    format:
+        date: yyyy-MM-dd
+    contentnegotiation:
+        favor-parameter: true
+        media-types:
+            pdf: application/pdf

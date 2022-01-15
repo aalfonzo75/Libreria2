@@ -62,10 +62,9 @@ public class LibroController {
         return "crear_libro";  //retorno esa vista
     }
 
-
     @PostMapping("/crear_libro")
     public String guardarLibro(ModelMap model, RedirectAttributes redirectAtr, @ModelAttribute Libro libro) {
-       try {
+        try {
             libroServicio.crearLibro(libro);
             model.put("exito", "Registro exitoso");
             return "redirect:/libro/lista_libro";  //retorno esa vista
@@ -107,7 +106,7 @@ public class LibroController {
 
         List<Libro> todos = libroServicio.listaTodosLibros();
         model.addAttribute("libros", todos);
-
+        model.addAttribute("title", "Listado de Libros");
         return "lista_libro";  //retorno esa vista
     }
 
@@ -135,4 +134,3 @@ public class LibroController {
     }
 
 }
-

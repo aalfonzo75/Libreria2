@@ -6,9 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Libreria2AppApplication {
-    
-//    @Autowired
-//    private UsuarioServicio usuarioServicio;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Libreria2AppApplication.class, args);
