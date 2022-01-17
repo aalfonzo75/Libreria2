@@ -63,6 +63,7 @@ public class EditorialController {
     public String lista(ModelMap modelo) {
         List<Editorial> listaEditorial = editorialServicio.listarTodos();
         modelo.addAttribute("editoriales", listaEditorial);
+        modelo.addAttribute("title", "Listado de Editoriales");
         return "lista_editorial";
     }
 

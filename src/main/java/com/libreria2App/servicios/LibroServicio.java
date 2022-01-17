@@ -1,17 +1,13 @@
 package com.libreria2App.servicios;
-import com.libreria2App.entidades.Autor;
-import com.libreria2App.entidades.Editorial;
+
 import com.libreria2App.entidades.Libro;
 import com.libreria2App.errores.ErrorServicio;
-import com.libreria2App.repositorios.AutorRepositorio;
-import com.libreria2App.repositorios.EditorialRepositorio;
 import com.libreria2App.repositorios.LibroRepositorio;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

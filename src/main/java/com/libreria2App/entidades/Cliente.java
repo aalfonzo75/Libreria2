@@ -53,7 +53,7 @@ public class Cliente {
 
     public void setId(String id) {
         this.id = id;
-    }
+    }    
 
     public Long getDni() {
         return dni;

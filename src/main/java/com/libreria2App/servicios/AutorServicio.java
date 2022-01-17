@@ -1,6 +1,5 @@
 package com.libreria2App.servicios;
 import com.libreria2App.entidades.Autor;
-import com.libreria2App.entidades.Libro;
 import com.libreria2App.errores.ErrorServicio;
 import com.libreria2App.repositorios.AutorRepositorio;
 import java.util.ArrayList;

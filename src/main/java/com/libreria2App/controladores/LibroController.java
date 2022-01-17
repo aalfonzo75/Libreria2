@@ -7,8 +7,15 @@ import com.libreria2App.errores.ErrorServicio;
 import com.libreria2App.servicios.AutorServicio;
 import com.libreria2App.servicios.EditorialServicio;
 import com.libreria2App.servicios.LibroServicio;
+import com.libreria2App.util.LibroPdfExportar;
+import com.libreria2App.util.LibroPdfExportar;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -51,8 +58,7 @@ public class LibroController {
 
         } else {
             Libro libro = new Libro();
-            model.addAttribute("libro", libro);
-            System.out.println(libro.toString());
+            model.addAttribute("libro", libro);           
         }
         List<Autor> autores = autorServicio.listarTodos(); //Se listan los autores
         List<Editorial> editoriales = editorialServicio.listarTodos();  //Se listan las editoriales
@@ -131,6 +137,27 @@ public class LibroController {
         } catch (Exception e) {
             return "redirect:/";
         }
+    }
+    
+    @GetMapping("/exportar/pdf")
+    public void exportarToPDF(HttpServletResponse response) throws ErrorServicio, IOException {
+        response.setContentType("application/pdf");
+        //Genero el nombre del archivo PDF con la fecha y hora actual
+        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaACtual = formatoFecha.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "filename=Listado_Libros_" + fechaACtual + ".pdf";
+               
+        //String headerValue = "attachment; filename=Listado_Libros_" + fechaACtual + ".pdf"; descarga el archivo
+        
+        response.setHeader(headerKey, headerValue);
+        
+         List<Libro> listaLibros = libroServicio.listaTodosLibros();        
+         
+        LibroPdfExportar exportar = new LibroPdfExportar(listaLibros);
+        exportar.exportarPdf(response);
+         
     }
 
 }

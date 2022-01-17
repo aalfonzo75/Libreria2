@@ -27,8 +27,12 @@ public class PrestamoServicio {
     private ClienteServicio clienteServicio;
     
     @Transactional
-    public void crearPrestamo(String idLibro, String idCliente) throws ErrorServicio {
-         //Buscamos el libro que se va a prestar al cliente
+    public void crearPrestamo(String idLibro, String idCliente) throws ErrorServicio {        
+         //Si ID fuese Integer:
+        // Libro libro=libroServicio.buscarPorId(Integer.parseInt(idLibro));
+        // Cliente cliente = clienteServicio.buscarPorId(Integer.parseInt(idCliente));
+
+        //Buscamos el libro que se va a prestar al cliente
         Libro libro=libroServicio.buscarPorId(idLibro);
         Cliente cliente = clienteServicio.buscarPorId(idCliente);
         
@@ -36,14 +40,20 @@ public class PrestamoServicio {
         //valido que el libro este disponible para el prestamo
         buscarYvalidarDisponibilidad(libro,cliente,prestamo);
         prestamo.setFechaPrestamo(new Date());
+        
         prestamo.setFechaDevolucion(null);
         prestamo.setAlta(true);
         
         prestamoRepositorio.save(prestamo);
     }
+    
+    
 
     @Transactional
     public Prestamo modificarPrestamo(Prestamo prestamoEditado) throws ErrorServicio {
+        //Si ID fuese Integer:
+        //busco el prestamo para modificarlo
+    // Prestamo prestamoEnBD = prestamoRepositorio.buscarPorId(Integer.parseInt(prestamoEditado.getId()));
 
         //busco el prestamo para modificarlo
        Prestamo prestamoEnBD = prestamoRepositorio.buscarPorId(prestamoEditado.getId());

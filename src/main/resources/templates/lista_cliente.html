@@ -15,26 +15,36 @@
 
                 <div class="row d.flex w-100 justify-content-around text-white">
                     <div class="container m-auto">
+                        <!-- Mensaje EXITO-->
                         <div th:if="${exito}!=null" class="card bg-success mb-3 ">
                             <div class="card-body">
-                                <h5 class="card-title">Exito</h5>
+                                <!--<h5 class="card-title">Éxito</h5>-->
                                 <p class="card-text" th:text="${exito}"></p>
                             </div>
                         </div>
+                        <!-- Mensaje ERROR-->
                         <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Error</h5>
+                                <!--<h5 class="card-title">Error</h5>-->
                                 <p class="card-text" th:text="${error}"></p>
                             </div>
                         </div>
+                        <!-- TITULO-->
+                        <div class="col-12 px-2 text-center">
+                            <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
+                        </div>
                     </div>
-                    <div class="col-12 px-2 text-center">
-                        <h1 class="display-8 font-weight-bolder">Listado de Clientes</h1>
+                    <!-- Mensaje LISTA VACIA-->
+                    <div th:if="${clientes.isEmpty()}" class="card text-white bg-dark mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Tabla vacía. Debes crear un Cliente</h5>                                
+                        </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" th:unless="${clientes.isEmpty()}">
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
+                                    <!-- <th scope="col">ID</th>-->
                                     <th scope="col">DNI</th>
                                     <th scope="col">Nombre</th>					
                                     <th scope="col">Apellido</th>
@@ -47,7 +57,8 @@
                             </thead>
                             <tbody th:each="cliente : ${clientes}">
                                 <tr>                        
-                                    <td scope="row" th:text="${cliente.dni}"></td> 
+                                    <!--<td scope="row" th:text="${cliente.id}"></td> -->
+                                    <td scope="row" th:text="${cliente.dni}"></td>
                                     <td th:text="${cliente.nombre}"></td> <!--para dar tamaño a columna class="col-4" -->
                                     <td th:text="${cliente.apellido}"></td>
                                     <td th:text="${cliente.telefono}"></td> 
@@ -73,8 +84,10 @@
                         </table>
                     </div>
                      <div class="flex_right">
-                       <a th:href="@{/}" class="btn btn-primary my-2">Volver al Menú</a>
+                       <a th:href="@{/}" class="btn btn-warning my-2">Volver al Menú</a>
                         <a th:href="@{/cliente/crear_cliente}" class="btn btn-success my-2">Agregar otro Cliente</a>
+                        <a th:href="@{/cliente/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
+                        <!--<a th:href="@{/cliente/lista_cliente/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>-->
                     </div>
                     
                 </div>

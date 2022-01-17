@@ -63,6 +63,7 @@ public class AutorController {
     public String lista(ModelMap model) {
         List<Autor> todos = autorServicio.listarTodos();
         model.addAttribute("autores", todos);
+        model.addAttribute("title", "Listado de Autores");
         return "lista_autor";  //retorno esa vista
     }
 

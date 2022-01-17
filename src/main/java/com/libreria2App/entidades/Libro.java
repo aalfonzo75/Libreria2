@@ -43,13 +43,14 @@ public class Libro {
     private Editorial editorial;
     
     //GETTERS AND SETTERS
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
+    }    
 
     public Long getIsbn() {
         return isbn;

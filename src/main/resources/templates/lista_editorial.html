@@ -15,26 +15,36 @@
 
                 <div class="row d.flex w-100 justify-content-around text-white">
                     <div class="container m-auto">
+                        <!-- Mensaje EXITO-->
                         <div th:if="${exito}!=null" class="card bg-success mb-3 ">
                             <div class="card-body">
-                                <h5 class="card-title">Exito</h5>
+                                <!--<h5 class="card-title">Éxito</h5>-->
                                 <p class="card-text" th:text="${exito}"></p>
                             </div>
                         </div>
+                        <!-- Mensaje ERROR-->
                         <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Error</h5>
+                                <!--<h5 class="card-title">Error</h5>-->
                                 <p class="card-text" th:text="${error}"></p>
                             </div>
                         </div>
+                        <!-- TITULO-->
+                        <div class="col-12 px-2 text-center">
+                            <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
+                        </div>
                     </div>
-                    <div class="col-12 px-2 text-center">
-                        <h1 class="display-8 font-weight-bolder">  Listado de Editoriales</h1>
+                    <!-- Mensaje LISTA VACIA-->
+                    <div th:if="${editoriales.isEmpty()}" class="card text-white bg-dark mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Tabla vacía. Debes crear una Editorial</h5>                                
+                        </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" th:unless="${editoriales.isEmpty()}">
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
+                                    <!--<th scope="col">ID</th>-->
                                     <th scope="col">Nombre</th>
                                     <th scope="col">¿Esta activo?</th>
                                     <th scope="col">Editar</th>
@@ -43,9 +53,8 @@
                             </thead>
                             <tbody th:each="editorial : ${editoriales}">
                                 <tr>
-                                    <!-- <th scope="row" th:text="${libro.id}"></th>-->
-                                    
-                                    <td th:text="${editorial.nombre}"></td>                                       
+                                    <!--<td scope="row" th:text="${editorial.id}"></td> -->                                   
+                                    <td scope="row" th:text="${editorial.nombre}"></td>                                       
 
                                     <td><!--Icono ACTIVO -->
                                         <i th:if="${editorial.alta}" class="fas fa-check-circle color-green"></i> <!--Si el libro esta activo por circulo verde -->

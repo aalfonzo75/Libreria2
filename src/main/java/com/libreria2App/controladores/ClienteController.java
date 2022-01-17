@@ -3,7 +3,13 @@ package com.libreria2App.controladores;
 import com.libreria2App.entidades.Cliente;
 import com.libreria2App.errores.ErrorServicio;
 import com.libreria2App.servicios.ClienteServicio;
+import com.libreria2App.util.ClientePdfExportar;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -78,6 +84,7 @@ public class ClienteController {
     public String listaClientes(ModelMap model) {
         List<Cliente> todos = clienteServicio.listaTodosClientes();
         model.addAttribute("clientes", todos);
+        model.addAttribute("title", "Listado de Clientes");
         return "lista_cliente";  //retorno esa vista
     }
 
@@ -101,6 +108,27 @@ public class ClienteController {
         } catch (Exception e) {
             return "redirect:/";
         }
+    }
+    
+    @GetMapping("/exportar/pdf")
+    public void exportarToPDF(HttpServletResponse response) throws ErrorServicio, IOException {
+        response.setContentType("application/pdf");
+        //Genero el nombre del archivo PDF con la fecha y hora actual
+        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaACtual = formatoFecha.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "filename=Listado_Clientes_" + fechaACtual + ".pdf";
+        
+        //String headerValue = "attachment; filename=users_" + fechaACtual + ".pdf";
+        
+        response.setHeader(headerKey, headerValue);
+        
+         List<Cliente> listaClientes = clienteServicio.listaTodosClientes();        
+         
+        ClientePdfExportar exportar = new ClientePdfExportar(listaClientes);
+        exportar.exportarPdf(response);
+         
     }
 
 }

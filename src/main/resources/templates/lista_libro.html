@@ -35,11 +35,11 @@
                         <div class="col-12 px-2 text-center">
                             <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
                         </div>
-
                     </div>
-                    <div th:if="${libros.isEmpty()}" class="card text-white bg-warning mb-3">
+                    <!-- Mensaje LISTA VACIA-->
+                    <div th:if="${libros.isEmpty()}" class="card text-white bg-dark mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Todavía no hay libros cargados</h5>                                
+                            <h5 class="card-title">Tabla vacía. Debes crear un Libro</h5>                                
                         </div>
                     </div>
                     <!-- <div th:if="${libros.isEmpty()}">
@@ -52,6 +52,7 @@
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
+                                    <!-- <th scope="col">ID</th>-->
                                     <th scope="col">Isbn</th>
                                     <th scope="col">Titulo</th>					
                                     <th scope="col">Año</th>
@@ -67,7 +68,8 @@
                             </thead>
                             <tbody th:each="libro : ${libros}">
                                 <tr> 
-                                    <td scope="row" th:text="${libro.isbn}"></td> 
+                                     <!--<td scope="row" th:text="${libro.id}"></td>-->
+                                    <td scope="row" th:text="${libro.isbn}"></td>
                                     <td th:text="${libro.titulo}"></td> <!-- para ajustar el ancho de columna usar: class="col-1" -->  
                                     <td th:text="${libro.anio}"></td>
                                     <td th:text="${libro.autor.nombre}"></td>
@@ -96,7 +98,8 @@
                     <div class="flex_right">
                         <a th:href="@{/}" class="btn btn-warning my-2">Volver</a>
                         <a th:href="@{/libro/crear_libro}" class="btn btn-success my-2">Agregar otro libro</a> 
-                        <a th:href="@{/libro/lista_libro/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
+                        <a th:href="@{/libro/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
+                         <!--  <a th:href="@{/libro/lista_libro/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>-->
                     </div>
                     <!--  <a th:href="@{/libro/lista_libro/?format=pdf}" class="nav-link float-lefth" title="Exportar a PDF" target="_blank"><img class="img-responsive center-box" th:src="@{/assets/download.png}" height="auto"></a>-->
                 </div>

@@ -15,26 +15,36 @@
 
                 <div class="row d.flex w-100 justify-content-around text-white">
                     <div class="container m-auto">
+                        <!-- Mensaje EXITO-->
                         <div th:if="${exito}!=null" class="card bg-success mb-3 ">
                             <div class="card-body">
-                                <h5 class="card-title">Exito</h5>
+                                <!--<h5 class="card-title">Éxito</h5>-->
                                 <p class="card-text" th:text="${exito}"></p>
                             </div>
                         </div>
+                        <!-- Mensaje ERROR-->
                         <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Error</h5>
+                                <!--<h5 class="card-title">Error</h5>-->
                                 <p class="card-text" th:text="${error}"></p>
                             </div>
                         </div>
+                        <!-- TITULO-->
+                        <div class="col-12 px-2 text-center">
+                            <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
+                        </div>
                     </div>
-                    <div class="col-12 px-2 text-center">
-                        <h1 class="display-8 font-weight-bolder">Listado de Préstamos</h1>
+                    <!-- Mensaje LISTA VACIA-->
+                    <div th:if="${prestamos.isEmpty()}" class="card text-white bg-dark mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Tabla vacía. Debes crear un Prestamo</h5>                                
+                        </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" th:unless="${prestamos.isEmpty()}">
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
+                                   <!--<th scope="col">ID</th>-->
                                     <th scope="col">Nombre del Cliente</th>
                                     <th scope="col">Titulo del Libro</th>					
                                     <th scope="col">Fecha del prestamo</th>
@@ -46,7 +56,8 @@
                             </thead>
                             <tbody th:each="prestamo : ${prestamos}">
                                 <tr>
-                                    <td scope="row" th:text="${prestamo.cliente.nombre}"></td> 
+                                    <!--<td scope="row" th:text="${prestamo.id}"></td>-->
+                                    <td scope="row" th:text="${prestamo.cliente.nombre}"></td>
                                     <td th:text="${prestamo.libro.titulo}"></td>
                                     <td th:text="${prestamo.fechaPrestamo}"></td>
                                     <td th:if="${prestamo.fechaDevolucion}==null">Pendiente</td>
@@ -72,8 +83,10 @@
                         </table>
                     </div>
                      <div class="flex_right">
-                       <a th:href="@{/}" class="btn btn-primary my-2">Volver al Menú</a>
+                       <a th:href="@{/}" class="btn btn-warning my-2">Volver al Menú</a>
                        <a th:href="@{/prestamo/crear_prestamo}" class="btn btn-success my-2">Agregar otro Prestamo</a>
+                       <a th:href="@{/prestamo/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
+                       <!-- <a th:href="@{/prestamo/lista_prestamo/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>-->
                     </div>
                     
                 </div>

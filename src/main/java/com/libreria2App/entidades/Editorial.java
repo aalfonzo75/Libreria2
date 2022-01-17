@@ -22,6 +22,7 @@ public class Editorial {
     private Boolean alta;
     
     //GETTERS AND SETTERS
+
     public String getId() {
         return id;
     }
