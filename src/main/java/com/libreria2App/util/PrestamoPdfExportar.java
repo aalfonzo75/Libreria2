@@ -38,7 +38,7 @@ public class PrestamoPdfExportar {
         font.setColor(Color.WHITE); //color letra
         font.setSize(12); //tamaño letra
 
-        cell.setPhrase(new Phrase("ID", font));
+        cell.setPhrase(new Phrase("N°", font));
         tabla.addCell(cell);
         cell.setPhrase(new Phrase("Cliente", font));
         tabla.addCell(cell);
@@ -97,7 +97,7 @@ public class PrestamoPdfExportar {
         font.setSize(16);
         font.setColor(Color.BLACK);
 
-        Paragraph p = new Paragraph("LISTADO DE PRESTAMOS", font);
+        Paragraph p = new Paragraph("LISTA DE PRESTAMOS", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
         return p;
     }

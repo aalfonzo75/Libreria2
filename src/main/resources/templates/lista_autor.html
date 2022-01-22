@@ -45,27 +45,27 @@
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
-                                    <!--<th scope="col">ID</th>-->
+                                    <th scope="col">N°</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">¿Esta activo?</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Alta/Baja</th>                                       
                                 </tr>
                             </thead>
-                            <tbody th:each="autor : ${autores}">
+                            <tbody th:each="autor,contador : ${autores}">
                                 <tr>
-                                     <!--<th scope="row" th:text="${autor.id}"></th>-->
-                                    <td scope="row" th:text="${autor.nombre}"></td> 
+                                    <td scope="row" th:text="${contador.index+1}"></td> <!--contador de autores -->
+                                    <td th:text="${autor.nombre}"></td> 
                                     <td><!--Icono ACTIVO -->
                                         <i th:if="${autor.alta}" class="fas fa-check-circle color-green"></i> <!--Si el libro esta activo por circulo verde -->
                                         <i th:unless="${autor.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
                                     </td>
                                     <td><!--Icono EDITAR -->
-                                        <a th:href="@{/autor/editar_autor/__${autor.id}__}"><i class="far fa-edit"></i></a> 
+                                        <a th:href="@{/autor/editar_autor/__${autor.id}__}"><i class="far fa-edit color-blue"></i></a> 
                                     </td>   
                                     <td><!-- ALTA/BAJA -->
                                         <a th:if="${autor.alta}" th:href="@{/autor/baja/__${autor.id}__}"><i class="fas fa-trash-alt"></i></a> 
-                                        <a th:unless="${autor.alta}" th:href="@{/autor/alta/__${autor.id}__}"><i class="fas fa-arrow-alt-circle-up"></i></a>  
+                                        <a th:unless="${autor.alta}" th:href="@{/autor/alta/__${autor.id}__}"><i class="fas fa-arrow-alt-circle-up color-green"></i></a>  
                                     </td>
                                 </tr>
                             </tbody>

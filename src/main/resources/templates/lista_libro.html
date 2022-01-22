@@ -52,7 +52,7 @@
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
-                                    <!-- <th scope="col">ID</th>-->
+                                    <th scope="col">N°</th>
                                     <th scope="col">Isbn</th>
                                     <th scope="col">Titulo</th>					
                                     <th scope="col">Año</th>
@@ -66,10 +66,10 @@
                                     <th scope="col">Alta/Baja</th>
                                 </tr>
                             </thead>
-                            <tbody th:each="libro : ${libros}">
+                            <tbody th:each="libro,contador : ${libros}">
                                 <tr> 
-                                     <!--<td scope="row" th:text="${libro.id}"></td>-->
-                                    <td scope="row" th:text="${libro.isbn}"></td>
+                                    <td scope="row" th:text="${contador.index+1}"></td> <!--contador de libros -->
+                                    <td th:text="${libro.isbn}"></td>
                                     <td th:text="${libro.titulo}"></td> <!-- para ajustar el ancho de columna usar: class="col-1" -->  
                                     <td th:text="${libro.anio}"></td>
                                     <td th:text="${libro.autor.nombre}"></td>
@@ -83,11 +83,11 @@
                                         <i th:unless="${libro.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
                                     </td>
                                     <td><!--Icono EDITAR -->
-                                        <a th:href="@{/libro/editar_libro/__${libro.id}__}"><i class="far fa-edit"></i></a> 
+                                        <a th:href="@{/libro/editar_libro/__${libro.id}__}"><i class="far fa-edit color-blue"></i></a> 
                                     </td>   
                                     <td><!-- ALTA/BAJA -->
                                         <a th:if="${libro.alta}" th:href="@{/libro/baja/__${libro.id}__}"><i class="fas fa-trash-alt"></i></a> 
-                                        <a th:unless="${libro.alta}" th:href="@{/libro/alta/__${libro.id}__}"><i class="fas fa-arrow-alt-circle-up"></i></a>  
+                                        <a th:unless="${libro.alta}" th:href="@{/libro/alta/__${libro.id}__}"><i class="fas fa-arrow-alt-circle-up color-green"></i></a>  
                                     </td>
                                 </tr>
 
@@ -96,9 +96,9 @@
                         </table>
                     </div>
                     <div class="flex_right">
-                        <a th:href="@{/}" class="btn btn-warning my-2">Volver</a>
+                        <a th:href="@{/}" class="btn btn-warning my-2">Volver al Menú</a>
                         <a th:href="@{/libro/crear_libro}" class="btn btn-success my-2">Agregar otro libro</a> 
-                        <a th:href="@{/libro/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
+                        <a th:href="@{/libro/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> Imprimir Listado en PDF</a>
                          <!--  <a th:href="@{/libro/lista_libro/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>-->
                     </div>
                     <!--  <a th:href="@{/libro/lista_libro/?format=pdf}" class="nav-link float-lefth" title="Exportar a PDF" target="_blank"><img class="img-responsive center-box" th:src="@{/assets/download.png}" height="auto"></a>-->

@@ -44,7 +44,7 @@
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
-                                    <!-- <th scope="col">ID</th>-->
+                                    <th scope="col">N°</th>
                                     <th scope="col">DNI</th>
                                     <th scope="col">Nombre</th>					
                                     <th scope="col">Apellido</th>
@@ -55,10 +55,10 @@
                                     <th scope="col">Alta/Baja</th>
                                 </tr>
                             </thead>
-                            <tbody th:each="cliente : ${clientes}">
+                            <tbody th:each="cliente,contador : ${clientes}">
                                 <tr>                        
-                                    <!--<td scope="row" th:text="${cliente.id}"></td> -->
-                                    <td scope="row" th:text="${cliente.dni}"></td>
+                                    <td scope="row" th:text="${contador.index+1}"></td> <!--contador de clientes -->
+                                    <td th:text="${cliente.dni}"></td>
                                     <td th:text="${cliente.nombre}"></td> <!--para dar tamaño a columna class="col-4" -->
                                     <td th:text="${cliente.apellido}"></td>
                                     <td th:text="${cliente.telefono}"></td> 
@@ -72,11 +72,11 @@
                                         <i th:unless="${cliente.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
                                     </td>
                                     <td><!--Icono EDITAR -->
-                                        <a th:href="@{/cliente/editar_cliente/__${cliente.id}__}"><i class="far fa-edit"></i></a> 
+                                        <a th:href="@{/cliente/editar_cliente/__${cliente.id}__}"><i class="far fa-edit  color-blue"></i></a> 
                                     </td>   
                                     <td><!-- ALTA/BAJA -->
                                         <a th:if="${cliente.alta}" th:href="@{/cliente/baja/__${cliente.id}__}"><i class="fas fa-trash-alt"></i></a> 
-                                        <a th:unless="${cliente.alta}" th:href="@{/cliente/alta/__${cliente.id}__}"><i class="fas fa-arrow-alt-circle-up"></i></a>  
+                                        <a th:unless="${cliente.alta}" th:href="@{/cliente/alta/__${cliente.id}__}"><i class="fas fa-arrow-alt-circle-up color-green"></i></a>  
                                     </td>
                                 </tr>
 
@@ -86,7 +86,7 @@
                      <div class="flex_right">
                        <a th:href="@{/}" class="btn btn-warning my-2">Volver al Menú</a>
                         <a th:href="@{/cliente/crear_cliente}" class="btn btn-success my-2">Agregar otro Cliente</a>
-                        <a th:href="@{/cliente/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>
+                        <a th:href="@{/cliente/exportar/pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> Imprimir Listado en PDF</a>
                         <!--<a th:href="@{/cliente/lista_cliente/?format=pdf}" class="btn btn-primary my-2" target="_blank"><i class="far fa-file-alt"></i> PDF</a>-->
                     </div>
                     

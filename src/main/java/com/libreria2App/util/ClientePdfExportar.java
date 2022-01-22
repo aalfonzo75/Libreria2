@@ -30,13 +30,13 @@ public class ClientePdfExportar {
     private void tablaEncabezado(PdfPTable tabla) {
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(Color.LIGHT_GRAY); // color de fondo
-        cell.setPadding(5); //ancho de la fila
+        cell.setPadding(10); //ancho de la fila
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.WHITE); //color letra
         font.setSize(12); //tamaño letra
 
-        cell.setPhrase(new Phrase("ID", font));
+        cell.setPhrase(new Phrase("N°", font));
          tabla.addCell(cell);
         cell.setPhrase(new Phrase("DNI", font));
          tabla.addCell(cell);
@@ -95,7 +95,7 @@ public class ClientePdfExportar {
         font.setSize(16);
         font.setColor(Color.BLACK);
          
-        Paragraph p = new Paragraph("LISTADO DE CLIENTES", font);
+        Paragraph p = new Paragraph("LISTA DE CLIENTES", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
         return p;
     }

@@ -44,28 +44,28 @@
                         <table class="table table-hover table-dark table-striped table-bordered">                    
                             <thead>
                                 <tr>
-                                    <!--<th scope="col">ID</th>-->
+                                    <th scope="col">N°</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">¿Esta activo?</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Alta/Baja</th>                                       
                                 </tr>
                             </thead>
-                            <tbody th:each="editorial : ${editoriales}">
+                            <tbody th:each="editorial,contador : ${editoriales}">
                                 <tr>
-                                    <!--<td scope="row" th:text="${editorial.id}"></td> -->                                   
-                                    <td scope="row" th:text="${editorial.nombre}"></td>                                       
+                                    <td scope="row" th:text="${contador.index+1}"></td> <!--contador de editoriales -->                                   
+                                    <td th:text="${editorial.nombre}"></td>                                       
 
                                     <td><!--Icono ACTIVO -->
                                         <i th:if="${editorial.alta}" class="fas fa-check-circle color-green"></i> <!--Si el libro esta activo por circulo verde -->
                                         <i th:unless="${editorial.alta}" class="fas fa-times-circle color-red"></i> <!--si es de otra manera pon circulo rojo -->
                                     </td>
                                     <td><!--Icono EDITAR -->
-                                        <a th:href="@{/editorial/editar_editorial/__${editorial.id}__}"><i class="far fa-edit"></i></a> 
+                                        <a th:href="@{/editorial/editar_editorial/__${editorial.id}__}"><i class="far fa-edit color-blue"></i></a> 
                                     </td>   
                                     <td><!-- ALTA/BAJA -->
                                         <a th:if="${editorial.alta}" th:href="@{/editorial/baja/__${editorial.id}__}"><i class="fas fa-trash-alt"></i></a> 
-                                        <a th:unless="${editorial.alta}" th:href="@{/editorial/alta/__${editorial.id}__}"><i class="fas fa-arrow-alt-circle-up"></i></a>  
+                                        <a th:unless="${editorial.alta}" th:href="@{/editorial/alta/__${editorial.id}__}"><i class="fas fa-arrow-alt-circle-up color-green"></i></a>  
                                     </td>
 
                                 </tr>
