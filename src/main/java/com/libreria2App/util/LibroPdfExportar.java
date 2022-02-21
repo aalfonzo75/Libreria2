@@ -30,7 +30,7 @@ public class LibroPdfExportar {
 
     private void tablaEncabezado(PdfPTable tabla) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.LIGHT_GRAY); // color de fondo
+        cell.setBackgroundColor(Color.blue); // color de fondo
         cell.setPadding(5); //ancho de la fila
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -100,44 +100,13 @@ public class LibroPdfExportar {
         font.setSize(16);
         font.setColor(Color.BLACK);
 
-        Paragraph p = new Paragraph("LISTA DE DE LIBROS", font);
+        Paragraph p = new Paragraph("LISTA DE LIBROS REGISTRADOS", font);
         p.setAlignment(Paragraph.ALIGN_BOTTOM);
         return p;
     }
 
-//   //document.setPageCount(0);        
-//        //color y tipo de fuente del Titulo
-//        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-//        font.setSize(10);
-//        font.setColor(Color.BLACK);
-//        Paragraph piePagina = new Paragraph("Página " + document.getPageNumber(), font);
-//        piePagina.setAlignment(Element.ALIGN_CENTER);
-//        piePagina.setFirstLineIndent(0);
-//        document.add(piePagina);
+
    
 
 }
 
-//OTRA FORMA DE COLOCAR TITULO CON FONDO DE COLOR
-//    private void tablaTitulo(PdfPTable tabla) {
-//        //color y tipo de fuente del Titulo
-//        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-//        font.setSize(16);
-//        font.setColor(Color.BLACK);
-//         
-//        //TABLA TITULO del pdf
-//        PdfPTable tablaTitulo = new PdfPTable(1);
-//
-//        //Creo CELDA titulo y le asigno formato
-//        PdfPCell titulo = new PdfPCell(new Phrase("LISTADO DE LIBROS", fuenteTitulo));// agrego nombre al titulo y fuenteTitulo
-//        titulo.setBorder(0); //Sin borde de titulo
-//        //titulo.setBackgroundColor(new Color(105, 105, 105)); // color de fondo del titulo
-//        titulo.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        titulo.setVerticalAlignment(Element.ALIGN_CENTER);
-//        titulo.setPadding(25);//tamaño-ancho de la celda del titulo
-//
-//        //Le asigno a la tabla titulo la celda titulo
-//        tablaTitulo.addCell(titulo);
-//        tablaTitulo.setSpacingAfter(10);// asigno un espacio entre el titulo y la tabla
-//       
-//    }

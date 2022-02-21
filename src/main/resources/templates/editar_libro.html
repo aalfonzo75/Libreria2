@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-   <!-- Head -->
+    <!-- Head -->
     <head th:replace="/fragments/head :: head"></head>
 
     <body id="page-top">
@@ -14,20 +14,10 @@
             <div class="container mt-5"><!--Contenedor-->
 
                 <div class="row d.flex w-100 justify-content-around text-white">
-                    <div class="container m-auto">
-                        <div th:if="${exito}!=null" class="card bg-success mb-3 ">
-                            <div class="card-body">
-                                <h5 class="card-title">Exito</h5>
-                                <p class="card-text" th:text="${exito}"></p>
-                            </div>
-                        </div>
-                        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Error</h5>
-                                <p class="card-text" th:text="${error}"></p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <!-- Mensaje EXITO/ERROR-->
+                    <div th:replace="/fragments/msg_exito_error :: div"></div>
+
                     <div class="col-12 px-2 text-center">
                         <h1 class="display-8 font-weight-bolder">Editar Libro</h1>
                     </div>
@@ -37,7 +27,7 @@
                             <!--<input hidden th:value="${libro.id}" name="id">-->
 
                             <div class="col-md-12">
-                                <label for="" class="form-label">Titulo</label>
+                                <label for="" class="form-label">Título</label>
                                 <input th:value="${libro.titulo}" name="titulo" class="form-control w-100" type="text" placeholder="Titulo del libro">
                             </div>
 
@@ -47,7 +37,7 @@
                             </div>
 
                             <div class="col-4">
-                                <label for="" class="form-label">Anio</label>
+                                <label for="" class="form-label">Año</label>
                                 <input th:value="${libro.anio}" name="anio" class="form-control w-100" type="number" placeholder="Anio del libro" required min="1900">
                             </div>
 
@@ -70,7 +60,7 @@
                             </div>
 
                             <div class="col-8">
-                               <label for="" class="form-label">Editorial </label>
+                                <label for="" class="form-label">Editorial </label>
                                 <select class="form-control" th:field="*{editorial}">
                                     <option value="0" selected>Seleccione una Editorial</option>
                                     <!-- Uso de th:selected="${variable o condición}" para prefijar el valor actual del autor -->

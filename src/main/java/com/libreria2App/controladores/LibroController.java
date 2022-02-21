@@ -73,7 +73,8 @@ public class LibroController {
         try {
             libroServicio.crearLibro(libro);
             model.put("exito", "Registro exitoso");
-            return "redirect:/libro/lista_libro";  //retorno esa vista
+            return listaLibros(model);
+            //return "redirect:/libro/lista_libro";  //retorno esa vista
         } catch (ErrorServicio e) {
             model.put("error", "Falto algun dato");
             return "crear_libro";  //retorno esa vista
@@ -112,7 +113,7 @@ public class LibroController {
 
         List<Libro> todos = libroServicio.listaTodosLibros();
         model.addAttribute("libros", todos);
-        model.addAttribute("title", "Listado de Libros");
+        model.addAttribute("title", "Lista de Libros Registrados");
         return "lista_libro";  //retorno esa vista
     }
 
@@ -148,8 +149,6 @@ public class LibroController {
          
         String headerKey = "Content-Disposition";
         String headerValue = "filename=Listado_Libros_" + fechaACtual + ".pdf";
-               
-        //String headerValue = "attachment; filename=Listado_Libros_" + fechaACtual + ".pdf"; descarga el archivo
         
         response.setHeader(headerKey, headerValue);
         

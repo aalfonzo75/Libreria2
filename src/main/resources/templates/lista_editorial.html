@@ -11,29 +11,18 @@
 
         <!-- Header -->
         <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->
-            <div class="container mt-5"><!--Contenedor-->
+            <div class="container m-auto"><!--Contenedor-->
 
                 <div class="row d.flex w-100 justify-content-around text-white">
-                    <div class="container m-auto">
-                        <!-- Mensaje EXITO-->
-                        <div th:if="${exito}!=null" class="card bg-success mb-3 ">
-                            <div class="card-body">
-                                <!--<h5 class="card-title">Éxito</h5>-->
-                                <p class="card-text" th:text="${exito}"></p>
-                            </div>
-                        </div>
-                        <!-- Mensaje ERROR-->
-                        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                            <div class="card-body">
-                                <!--<h5 class="card-title">Error</h5>-->
-                                <p class="card-text" th:text="${error}"></p>
-                            </div>
-                        </div>
-                        <!-- TITULO-->
-                        <div class="col-12 px-2 text-center">
-                            <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
-                        </div>
+
+                    <!-- Mensaje EXITO/ERROR-->
+                    <div th:replace="/fragments/msg_exito_error :: div"></div>
+
+                    <!-- TITULO-->
+                    <div class="col-12 px-2 text-center">
+                        <h1 class="display-8 font-weight-bolder" th:text="${title}"></h1>
                     </div>
+
                     <!-- Mensaje LISTA VACIA-->
                     <div th:if="${editoriales.isEmpty()}" class="card text-white bg-dark mb-3">
                         <div class="card-body">
@@ -46,7 +35,7 @@
                                 <tr>
                                     <th scope="col">N°</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">¿Esta activo?</th>
+                                    <th scope="col">¿Activo?</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Alta/Baja</th>                                       
                                 </tr>

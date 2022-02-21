@@ -7,27 +7,30 @@
     <body id="page-top">
 
         <!-- Navigation -->
-        <nav th:replace="/fragments/navbar :: nav"></nav>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">LibreriaApp</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#page-top">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio/Menú</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>                       
+                    </ul>
+                </div>
+            </div>
+        </nav><!--Fin Navegación-->
 
         <!-- Header -->
         <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->
             <div class="container mt-5"><!--Contenedor-->
 
                 <div class="row d.flex w-100 justify-content-around text-white">
-                    <div class="container m-auto">
-                        <div th:if="${exito}!=null" class="card bg-success mb-3 ">
-                            <div class="card-body">
-                                <h5 class="card-title">Exito</h5>
-                                <p class="card-text" th:text="${exito}"></p>
-                            </div>
-                        </div>
-                        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Error</h5>
-                                <p class="card-text" th:text="${error}"></p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <!-- Mensaje EXITO/ERROR-->
+                    <div th:replace="/fragments/msg_exito_error :: div"></div>
+
                     <div class="col-12 px-2 text-center">
                         <h1 class="display-8 font-weight-bolder">Editar Autor</h1>
                     </div>

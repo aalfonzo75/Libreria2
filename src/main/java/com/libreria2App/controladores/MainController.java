@@ -15,7 +15,4 @@ public class MainController {
     public String inicio(ModelMap modelo){
         return "index";  //retorno esa vista
     }
-    
-     //Con el Post solicito la creacion de un nuevo registro como INSERT, enviar o recibir datos
-
 }

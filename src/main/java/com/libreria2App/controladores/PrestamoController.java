@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,25 +51,31 @@ public class PrestamoController {
     public String guardarPrestamo(ModelMap model, @RequestParam String idLibro, @RequestParam String idCliente) {
         try {
             prestamoServicio.crearPrestamo(idLibro, idCliente);
-            model.put("exito", "Prestamo realizado con éxito");
-            return "crear_prestamo";
-//            return listaPrestamos(model);
+            model.put("exito", "Préstamo realizado con éxito");
+//            return "crear_prestamo";
+          return listaPrestamos(model);
         } catch (ErrorServicio e) {
-            model.put("error", "Falto algun dato");
+            model.put("error", "Faltó algún dato");
             return "crear_prestamo";
         }
     }
 
     @GetMapping("/editar_prestamo/{id}") //PATHVARIABLE
     public String modificarPrestamo(@PathVariable String id, ModelMap model) {
+        //Se listan los clientes y los libros para crear el prestamo
+        List<Cliente> clientes = clienteServicio.listarActivos();
+        List<Libro> libros = libroServicio.listarActivos();
+        model.put("lista_cliente", clientes);
+        model.put("lista_libro", libros);
         model.put("prestamo", prestamoServicio.getOne(id));
+        
         return "editar_prestamo";
     }
-
+    
     @PostMapping("/editar_prestamo/{id}")
-    public String modificarPrestamo(ModelMap model, @PathVariable String id, @ModelAttribute Prestamo prestamo) {
+    public String modificarPrestamo(ModelMap model, @PathVariable String id, @RequestParam String idLibro, @RequestParam String idCliente) {
         try {
-            prestamoServicio.modificarPrestamo(prestamo);
+            prestamoServicio.modificarPrestamo(id, idLibro, idCliente);
             model.put("exito", "Modificacion exitosa");
             return listaPrestamos(model);
 //            return "redirect:/prestamo/lista_prestamo";
@@ -84,7 +89,7 @@ public class PrestamoController {
     public String listaPrestamos(ModelMap model) {
         List<Prestamo> todos = prestamoServicio.listaTodosPrestamos();
         model.addAttribute("prestamos", todos);
-        model.addAttribute("title", "Listado de Prestamos");
+        model.addAttribute("title", "Lista de Préstamos Registrados");
         return "lista_prestamo";  //retorno esa vista
     }
 
@@ -118,9 +123,7 @@ public class PrestamoController {
         String fechaACtual = formatoFecha.format(new Date());
          
         String headerKey = "Content-Disposition";
-        String headerValue = "filename=Listado_Prestamos_" + fechaACtual + ".pdf";
-        
-        //String headerValue = "attachment; filename=users_" + fechaACtual + ".pdf";
+        String headerValue = "filename=Lista_Prestamos_" + fechaACtual + ".pdf";
         
         response.setHeader(headerKey, headerValue);
         

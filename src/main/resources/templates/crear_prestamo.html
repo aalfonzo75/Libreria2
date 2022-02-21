@@ -12,60 +12,50 @@
         <!-- Header -->
         <header class="masthead">  <!-- esta clase( en css header.masthead) tiene la imagen: andrew-draper-ZjJd4jXN_G0-unsplash -->
             <div class="container mt-5"><!--Contenedor-->
-           
-            <div class="row d.flex w-100 justify-content-around text-white">
-                <div class="container m-auto">
-                    <div th:if="${exito}!=null" class="card bg-success mb-3 ">
-                        <div class="card-body">
-                            <h5 class="card-title">Exito</h5>
-                            <p class="card-text" th:text="${exito}"></p>
-                        </div>
+
+                <div class="row d.flex w-100 justify-content-around text-white">
+
+                    <!-- Mensaje EXITO/ERROR-->
+                    <div th:replace="/fragments/msg_exito_error :: div"></div>
+
+                    <div class="col-12 px-2 text-center">
+                        <h1 class="display-8 font-weight-bolder">Crear Préstamo</h1>
                     </div>
-                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Error</h5>
-                            <p class="card-text" th:text="${error}"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 px-2 text-center">
-                    <h1 class="display-8 font-weight-bolder">Crear Prestamo</h1>
-                </div>
-                <div class="col-md-6">
-                    <form th:action="@{/prestamo/crear_prestamo}" th:object="${prestamo}" class="row g-3" method="POST">
+                    <div class="col-md-6">
+                        <form th:action="@{/prestamo/crear_prestamo}" th:object="${prestamo}" class="row g-3" method="POST">
                             <!--   <input hidden th:field="*{id}">  --> 
-                                                      
+
                             <div class="col-6">
-                                <label for="" class="form-label">Cliente que solicita el prestamo </label>
+                                <label for="" class="form-label">Cliente que solicita el préstamo </label>
                                 <select class="form-control" name="idCliente" id="inputCliente" required>
                                     <option value="0" selected>Seleccione un Cliente</option>
                                     <option th:each="cliente : ${lista_cliente}" th:value="${cliente.id}"
-                                        th:text="${cliente.nombre}">
+                                            th:text="${cliente.nombre}">
                                     </option>
                                 </select>
                             </div>                            
-                            
+
 
                             <div class="col-6">
-                                <label for="" class="form-label">Libro para el prestamo </label>
-                               <select class="form-control" name="idLibro" id="inputLibro" required>
-                                   <option value="0" selected>Seleccione un Libro</option>
+                                <label for="" class="form-label">Libro para el préstamo </label>
+                                <select class="form-control" name="idLibro" id="inputLibro" required>
+                                    <option value="0" selected>Seleccione un Libro</option>
                                     <option th:each="libro : ${lista_libro}" th:value="${libro.id}"
-                                        th:text="${libro.titulo}">
+                                            th:text="${libro.titulo}">
                                     </option>
                                 </select>
                             </div> 
-                            
-                        <div class="col-12">
-                            <button class="btn btn-primary btn-block" type="submit">Guardar</button>
-                             <a th:href="@{/#prestamo}" class="btn btn-secondary">Volver al Menú</a>
-                        </div>
-                    </form>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                                <a th:href="@{/#prestamo}" class="btn btn-secondary">Volver al Menú</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                 </div>
-                </div>
+            </div>
         </header>
-      
+
         <!-- Footer-->
         <footer th:replace="/fragments/footer :: footer"></footer>
 

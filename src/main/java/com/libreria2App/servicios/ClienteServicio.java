@@ -70,8 +70,7 @@ public class ClienteServicio {
         Cliente cliente = clienteRepositorio.getOne(id);
         cliente.setAlta(false);
         return clienteRepositorio.save(cliente);
-        //throw new ErrorServicio("No se encontro el libro con el id solicitado");
-    }
+          }
 
     @Transactional
     public Cliente alta(String id) {

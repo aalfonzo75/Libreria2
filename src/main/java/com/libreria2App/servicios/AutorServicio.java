@@ -25,7 +25,6 @@ public class AutorServicio {
         validarDatos(nombre);
 
         Autor autor = new Autor();
-//        List<Libro> listaLibros = new ArrayList();
         autor.setNombre(nombre);
         autor.setAlta(true);
 

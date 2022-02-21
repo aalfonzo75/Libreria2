@@ -31,7 +31,7 @@ public class PrestamoPdfExportar {
     private void tablaEncabezado(PdfPTable tabla) {
 
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.LIGHT_GRAY); // color de fondo
+        cell.setBackgroundColor(Color.blue); // color de fondo
         cell.setPadding(5); //ancho de la fila
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -44,9 +44,9 @@ public class PrestamoPdfExportar {
         tabla.addCell(cell);
         cell.setPhrase(new Phrase("Libro", font));
         tabla.addCell(cell);
-        cell.setPhrase(new Phrase("Fecha Prestamo", font));
+        cell.setPhrase(new Phrase("Fecha Préstamo", font));
         tabla.addCell(cell);
-        cell.setPhrase(new Phrase("Fecha Devolucion", font));
+        cell.setPhrase(new Phrase("Fecha Devolución", font));
         tabla.addCell(cell);
         cell.setPhrase(new Phrase("Activos", font));
         tabla.addCell(cell);
@@ -80,7 +80,7 @@ public class PrestamoPdfExportar {
         //Creo un objeto de PdfPTable de 6 columnas
         PdfPTable tabla = new PdfPTable(6); //Asigno el numero de columnas
         tabla.setWidthPercentage(100f); //Ancho
-        tabla.setWidths(new float[]{0.6f, 3.0f, 4.5f, 2.0f, 2.0f, 1.3f}); //Ancho de columnas
+        tabla.setWidths(new float[]{0.7f, 3.0f, 4.0f, 2.0f, 2.5f, 1.3f}); //Ancho de columnas
         tabla.setSpacingBefore(10); // asigno un espacio entre el titulo y la tabla
 
         tablaEncabezado(tabla);
@@ -97,7 +97,7 @@ public class PrestamoPdfExportar {
         font.setSize(16);
         font.setColor(Color.BLACK);
 
-        Paragraph p = new Paragraph("LISTA DE PRESTAMOS", font);
+        Paragraph p = new Paragraph("LISTA DE PRÉSTAMOS REGISTRADOS", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
         return p;
     }

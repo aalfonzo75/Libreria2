@@ -6,21 +6,76 @@
 
     <body id="page-top">
 
-    <!-- Navigation -->
-    <nav th:replace="/fragments/navbar :: nav"></nav>
+        <!-- Navigation -->
+        <nav th:replace="/fragments/navbar :: nav"></nav>
 
-    <!-- Inicio-->
-    <!-- Header -->
-    <header th:replace="/fragments/headergenerico :: header"></header>
+        <!-- Inicio-->
+        <!-- Header -->
+        <header th:replace="/fragments/headergenerico :: header"></header>
 
-    <!-- Section Menu -->
-    <section th:replace="/fragments/sectionMenu :: section"></section>
+        <!-- Acerca De-->
+        <section class="page-section bg-dark" id="about">
+            <div class="container px-4 px-lg-5"> <!-- px-lg-5-->
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white mt-0">Acerca de</h2>
+                        <hr class="divider divider-light" />
+                        <p class="text-white-75 mb-4 justify-content">
+                            Proyecto de ejercitación del curso de <strong>Programación Web Full Stack de EGG</strong>.
+                            <br> <br>
+                            Desarrollo de un sistema web de reserva de libros <strong>con programación orientada a objetos <strong>(POO)</strong> en <strong>JAVA</strong>, 
+                                modelo de <strong>diseño MVC</strong>, utilizando una base  de datos <strong>MySQL</strong>, JPA Repository para persistir objetos y Spring Boot como framework de desarrollo web. 
+                                Administración de Libros, Autores, Editoriales, Clientes y Préstamos (guardar/modificar, listar, dar de baja <strong>(CRUD)</strong>). 
+                                <br> <br>                   
+                                Para realizar  un  préstamo se registra  el libro a prestar y el cliente asociado.  Se registra la fecha en la que se efectuó el préstamo y la fecha en la que fue devuelto el libro.
+                                </p>
+                                <a class="btn btn-primary btn-md" href="#inicio">Inicio/Menú</a>
+                                <a class="btn btn-light btn-md" href="#page-top">Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Footer-->
-    <footer th:replace="/fragments/footer :: footer"></footer>
-        
-    <!-- Bootstrap core JavaScript -->
-    <script th:replace="/fragments/boostjs :: script"></script> 
-        
+        <!-- Section Menu -->
+        <section th:replace="/fragments/sectionMenu :: section"></section>
+
+        <!-- Acerca De-->
+        <section class="page-section bg-success" id="contacto">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white mt-0">Contáctame</h2>
+                        <hr class="divider divider-light" />
+                        <h4 class="text-black mt-0">Librería Virtual</h4>
+
+                        <h6 class="text-black mt-0"> Mendoza - Argentina</h6>
+                        <h6 class="text-black mt-0">CP 5515</h6>
+
+                       
+
+
+
+                        <h6 class="text-black mt-0"><i></i> </h6> 
+                        <a class="text-black" target="_blank" href="mailto:aalfonzo.mtx@gmail.com">aalfonzo.mtx@gmail.com</a>
+                        <br>
+                        <a class="text-black" target="_blank" href="https://www.github.com/aalfonzo75">github.com/aalfonzo75/Libreria2App</a>
+                        
+                        <br> <br>  
+
+                        <a class="btn btn-primary btn-md" href="#inicio">Inicio/Menú</a>
+                        <a class="btn btn-light btn-md" href="#page-top">Home</a>
+                    </div>
+                     
+                </div>
+               
+            </div>
+        </section>
+
+        <!-- Footer-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:replace="/fragments/boostjs :: script"></script> 
+
     </body>
 </html>

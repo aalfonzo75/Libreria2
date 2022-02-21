@@ -89,6 +89,8 @@ public class Prestamo {
     public String toString() {
         return "Prestamo{" + "id=" + id + ", fechaPrestamo=" + fechaPrestamo + ", fechaDevolucion=" + fechaDevolucion + ", alta=" + alta + ", libro=" + libro + ", cliente=" + cliente + '}';
     }
+
+   
     
 
 }

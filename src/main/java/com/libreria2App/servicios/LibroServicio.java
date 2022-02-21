@@ -86,7 +86,7 @@ public class LibroServicio {
         Libro libro = libroRepositorio.getOne(id);
         libro.setAlta(false);
         return libroRepositorio.save(libro);
-        //throw new ErrorServicio("No se encontro el libro con el id solicitado");
+      
     }
 
     @Transactional
@@ -124,8 +124,7 @@ public class LibroServicio {
     @Transactional(readOnly = true)
     public Libro buscarPorId(String id) {
         return libroRepositorio.buscarPorId(id);
-    }
-    //, Integer eRestantes
+    }   
     
     public Libro validarDatos(Libro libro) throws ErrorServicio {
 

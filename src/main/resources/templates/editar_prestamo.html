@@ -14,44 +14,36 @@
             <div class="container mt-5"><!--Contenedor-->
            
             <div class="row d.flex w-100 justify-content-around text-white">
-                <div class="container m-auto">
-                    <div th:if="${exito}!=null" class="card bg-success mb-3 ">
-                        <div class="card-body">
-                            <h5 class="card-title">Exito</h5>
-                            <p class="card-text" th:text="${exito}"></p>
-                        </div>
-                    </div>
-                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Error</h5>
-                            <p class="card-text" th:text="${error}"></p>
-                        </div>
-                    </div>
-                </div>
+
+                <!-- Mensaje EXITO/ERROR-->
+                <div th:replace="/fragments/msg_exito_error :: div"></div>
+
                 <div class="col-12 px-2 text-center">
                     <h1 class="display-8 font-weight-bolder">Editar Préstamo</h1>
                 </div>
+                
                 <div class="col-md-6">
-                    <form th:action="@{/prestamo/editar_prestamo/__${prestamo.id}__}" th:object="${prestamo}" class="row g-3" method="POST">
-                            <input hidden th:field="*{id}">  
+                    <form th:action="@{/prestamo/editar_prestamo/__${prestamo.id}__}" class="row g-3" method="POST">
+                            <input hidden th:value="${prestamo.id}" name="id">
                                                       
-                            <div class="col-6">
-                                <label for="" class="form-label">Cliente que solicita el prestamo </label>
-                                <select class="form-control" th:field="*{cliente}">                                    
-                                    <option value="0" selected>Seleccione un Cliente</option>
-                                     <!-- Uso de th:selected="${variable o condición}" para prefijar el valor actual del prestamo -->
-                                    <option th:each="c : ${lista_cliente}" th:utext="${c.nombre}" th:value="${c.id}" th:selected="${cliente.id==prestamo.cliente.id}"></option>
+                            <div class="col-md-6">
+                                <label for="inputCliente" class="form-label">Nuevo cliente del prestamo</label>
+                                <!-- Uso de th:selected="${variable o condición}" para prefijar el valor actual del prestamo -->
+                                <select class="form-control" name="idCliente" id="inputCliente" required>
+                                    <option th:each="cliente : ${lista_cliente}" th:value="${cliente.id}"
+                                        th:text="${cliente.nombre}" th:selected="${cliente.id==prestamo.cliente.id}">
+                                    </option>
                                 </select>
-                            </div>                            
-                            
-
-                            <div class="col-6">
-                                <label for="" class="form-label">Libro para el prestamo </label>
-                                <select class="form-control" th:field="*{libro}">                                    
-                                    <option value="0" selected>Seleccione un Libro</option>
-                                    <option th:each="l : ${lista_libro}" th:utext="${l.nombre}" th:value="${l.id}" th:selected="${libro.id==prestamo.libro.id}"></option>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputLibro" class="form-label">Nuevo libro prestado</label>
+                                <!-- Uso de th:selected="${variable o condición}" para prefijar el valor actual del prestamo -->
+                                <select class="form-control" name="idLibro" id="inputLibro" required>
+                                    <option th:each="libro : ${lista_libro}" th:value="${libro.id}" th:text="${libro.titulo}"
+                                        th:selected="${libro.id==prestamo.libro.id}">
+                                    </option>
                                 </select>
-                            </div> 
+                            </div>
                             
                         <div class="col-12">
                             <button class="btn btn-primary btn-block" type="submit">Guardar</button>

@@ -29,7 +29,7 @@ public class ClientePdfExportar {
 
     private void tablaEncabezado(PdfPTable tabla) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.LIGHT_GRAY); // color de fondo
+        cell.setBackgroundColor(Color.blue); // color de fondo
         cell.setPadding(10); //ancho de la fila
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -78,7 +78,7 @@ public class ClientePdfExportar {
          //Creo un objeto de PdfPTable de 7 columnas
         PdfPTable tabla = new PdfPTable(7); //Asigno el numero de columnas
         tabla.setWidthPercentage(100f); //Ancho
-        tabla.setWidths(new float[] {0.6f, 2.0f, 3.0f, 3.0f, 3.0f, 1.5f, 1.3f}); //Ancho de columnas
+        tabla.setWidths(new float[] {0.7f, 2.0f, 3.0f, 3.0f, 3.0f, 1.7f, 1.3f}); //Ancho de columnas
         tabla.setSpacingBefore(10); // asigno un espacio entre el titulo y la tabla
          
         tablaEncabezado(tabla);
@@ -95,7 +95,7 @@ public class ClientePdfExportar {
         font.setSize(16);
         font.setColor(Color.BLACK);
          
-        Paragraph p = new Paragraph("LISTA DE CLIENTES", font);
+        Paragraph p = new Paragraph("LISTA DE CLIENTES REGISTRADOS", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
         return p;
     }
